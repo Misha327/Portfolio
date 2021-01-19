@@ -25,29 +25,21 @@ export default class Header extends React.Component {
 	// Adds an event listener when the component is mount.
 	componentDidMount() {
 		window.addEventListener("scroll", this.handleScroll);
-		this.handleScroll();
 	}
 
 	// Remove the event listener when the component is unmount.
 	componentWillUnmount() {
 		window.removeEventListener("scroll", this.handleScroll);
-		this.handleScroll();
 	}
-
 	// Hide or show the menu.
 	handleScroll = () => {
-		const { scrollPos } = this.state;
-		this.setState((prevState) => ({
-			scrollPos: -1 * document.body.getBoundingClientRect().top,
-			// show: prevState.scrollPos > -1 * scrollPos,
-		}));
-
-		const scrollPosBotttom = -1 * document.body.getBoundingClientRect().bottom;
-		// console.log(scrollPos);
-		// console.log(window.innerHeight * 3);
-		// Set height breakpoints
-
-		if (scrollPos >= 0 && scrollPos <= window.innerHeight) {
+    const scrollBot =
+    document.body.getBoundingClientRect().top === 0
+    ? document.body.getBoundingClientRect().top
+    : -document.body.getBoundingClientRect().top;
+    
+    console.log(scrollBot, this.props.homeHeight);
+		if (scrollBot >= 0 && scrollBot <= this.props.homeHeight) {
 			this.setState({
 				inHome: true,
 				inProjects: false,
@@ -59,8 +51,8 @@ export default class Header extends React.Component {
 			});
 		}
 		if (
-			scrollPos >= window.innerHeight - 50 &&
-			scrollPos <= window.innerHeight * 2
+			scrollBot >= (this.props.homeHeight * 95) / 100 &&
+			scrollBot <= (this.props.projectHeight * 24) / 25
 		) {
 			this.setState({
 				inProjects: true,
@@ -75,8 +67,8 @@ export default class Header extends React.Component {
 			});
 		}
 		if (
-			scrollPos + 1 >= window.innerHeight * 2 - 50 &&
-			scrollPos + 10  <= window.innerHeight * 3
+			scrollBot >= (this.props.projectHeight * 24) / 25 &&
+			scrollBot <= this.props.aboutHeight
 		) {
 			this.setState({
 				inAbout: true,
@@ -90,7 +82,10 @@ export default class Header extends React.Component {
 				show: true,
 			});
 		}
-		if (scrollPos + 10  >= window.innerHeight * 3) {
+		if (
+			scrollBot >= (this.props.aboutHeight * 95) / 100 &&
+			scrollBot <= this.props.contactHeight
+		) {
 			this.setState({
 				inContact: true,
 				inAbout: false,
@@ -107,7 +102,6 @@ export default class Header extends React.Component {
 
 	render() {
 		const { toggle, homeRef } = this.props;
-		// console.log(this.state.scrollPos, window.innerHeight);
 		return (
 			<>
 				<Transition>

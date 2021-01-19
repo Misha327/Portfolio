@@ -54,11 +54,6 @@ class Home extends React.Component {
 			projectWinSize: 0,
 			aboutTextVisible: false,
 
-			toHome: false,
-			toProjects: false,
-
-			toAbout: false,
-			toContact: false,
 			values: [],
 
 			section: null,
@@ -79,14 +74,10 @@ class Home extends React.Component {
 	}
 
 	componentDidMount() {
-		const homeHeight = this.homeRef.current.offsetHeight;
-		const projectHeight = this.projectRef.current.offsetHeight;
-		const aboutHeight = this.aboutRef.current.offsetHeight;
-		const contactHeight = this.contactRef.current.offsetHeight;
-
-		this.setState({ homeHeight, projectHeight, aboutHeight, contactHeight });
+		this.calculateWindowSizes();
 		// console.log(this.projectRef.current.offsetHeight);
 		window.addEventListener("scroll", this.activeWindow);
+		window.addEventListener("resize", this.calculateWindowSizes);
 	}
 
 	// Remove the event listener when the component is unmount.
@@ -94,40 +85,65 @@ class Home extends React.Component {
 		window.removeEventListener("scroll", this.activeWindow);
 	}
 
+	calculateWindowSizes = () => {
+		const homeHeight = this.homeRef.current.offsetHeight;
+		const projectHeight = this.projectRef.current.offsetHeight;
+		const aboutHeight = this.aboutRef.current.offsetHeight;
+		const contactHeight = this.contactRef.current.offsetHeight;
+
+		this.setState((prevState) => ({
+			homeHeight: homeHeight,
+			projectHeight: projectHeight + homeHeight,
+			aboutHeight: homeHeight + projectHeight + aboutHeight,
+			contactHeight: homeHeight + projectHeight + aboutHeight + contactHeight,
+		}));
+	};
+
 	activeWindow = () => {
 		const scrollBot = -document.body.getBoundingClientRect().top;
 
-		console.log(scrollBot, this.state.projectHeight);
+		// console.log(scrollBot, this.state.projectHeight);
+
 		// todo: use fractions of the heights to show animation when are actually visible
 		// Project section
 		if (
-			scrollBot >= this.state.homeHeight &&
-			scrollBot <= this.state.projectHeight + this.state.homeHeight
+			scrollBot >= this.state.homeHeight / 3 &&
+			scrollBot <= this.state.projectHeight
 		) {
 			this.setState({ projectVisible: true });
 		}
 		if (
-			scrollBot >= this.state.homeHeight &&
-			scrollBot <= this.state.projectHeight + this.state.homeHeight
+			scrollBot >= (this.state.homeHeight * 2) / 3 &&
+			scrollBot <= this.state.projectHeight
 		) {
 			this.setState({ cardsVisible: true });
 		}
 		// 3rd
-		if (scrollBot <= -1 * Math.round(window.innerHeight / 4)) {
+		if (
+			scrollBot >= (this.state.projectHeight * 4) / 6 &&
+			scrollBot <= this.state.aboutHeight
+		) {
 			this.setState({ aboutVisible: true });
 		}
-		if (scrollBot <= Math.round((window.innerHeight * -10) / 17)) {
+		if (
+			scrollBot >= (this.state.projectHeight * 5) / 6 &&
+			scrollBot <= this.state.aboutHeight
+		) {
 			this.setState({ photoVisible: true });
-		}
-		if (scrollBot <= (window.innerHeight * -5) / 6) {
 			this.setState({ aboutTextVisible: true });
 		}
-		// 4th
-		if (scrollBot <= Math.round((window.innerHeight * -5) / 4)) {
+
+		if (
+			scrollBot >= (this.state.aboutHeight * 5) / 6 &&
+			scrollBot <= this.state.contactHeight
+		) {
 			this.setState({ contactVisible: true });
-			if (scrollBot <= Math.round((window.innerHeight * -7) / 5)) {
-				this.setState({ formVisible: true });
-			}
+		}
+		if (
+			scrollBot >= (this.state.aboutHeight * 6) / 7 &&
+			scrollBot <= this.state.contactHeight
+		) {
+			this.setState({ formVisible: true });
 		}
 	};
 
@@ -144,9 +160,15 @@ class Home extends React.Component {
 			<div style={{ width: "100%" }}>
 				<Sidebar isOpen={this.state.isOpen} toggle={this.toggle} />
 
-				<Header toggle={this.toggle} />
+				<Header
+					toggle={this.toggle}
+					homeHeight={this.state.homeHeight}
+					projectHeight={this.state.projectHeight}
+					aboutHeight={this.state.aboutHeight}
+					contactHeight={this.state.contactHeight}
+				/>
 				<div ref={this.homeRef}>
-					<HomeSection ref={this.homeRef}></HomeSection>
+					<HomeSection></HomeSection>
 				</div>
 				<div ref={this.projectRef}>
 					<ProjectSection
