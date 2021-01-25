@@ -125,6 +125,7 @@ export const WelcomeTitle = styled.h1`
 		@media only screen and (min-height: ${size.md}) {
 		}
 		@media only screen and (min-height: ${size.lg}) {
+      font-size: 50px;
 		}
 	}
 	@media only screen and (min-width: ${size.md}) {

@@ -21,13 +21,22 @@ export default class Hamburger extends Component {
 		);
 	}
 }
-
+const size = {
+	xs: "320px",
+	sm: "480px",
+	md: "768px",
+	lg: "1200px",
+	xl: "1600px",
+};
 const Container = styled.div`
 	width: 35px;
 	height: 30px;
 	position: relative;
-	float: right;
-	margin: 15px auto 0;
+  float: right;
+  margin: 0;
+	@media screen only and (min-width: ${size.md}) {
+		margin: 15px auto 0;
+	}
 	-webkit-transform: rotate(0deg);
 	-moz-transform: rotate(0deg);
 	-o-transform: rotate(0deg);
@@ -41,8 +50,7 @@ const Container = styled.div`
 	display: none;
 	@media only screen and (max-width: 700px) {
 		display: block;
-    z-index: 9999999;
-
+		z-index: 9999999;
 	}
 	span {
 		display: block;
@@ -60,8 +68,7 @@ const Container = styled.div`
 		-webkit-transition: 0.25s ease-in-out;
 		-moz-transition: 0.25s ease-in-out;
 		-o-transition: 0.25s ease-in-out;
-    transition: 0.25s ease-in-out;
-
+		transition: 0.25s ease-in-out;
 	}
 	span:nth-child(1) {
 		top: 0px;
