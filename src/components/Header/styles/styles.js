@@ -103,7 +103,6 @@ export const NavLink = styled(LinkScroll)`
 	}
 `;
 
-const Line = styled.div``;
 
 
 export const Hamburger = styled.div`

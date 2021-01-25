@@ -66,8 +66,7 @@ export const Content = styled.div`
 		width: 400px;
 	}
 	@media only screen and (min-width: 570px) {
-    width: 500px;
-
+		width: 500px;
 	}
 	@media only screen and (min-width: ${size.md}) {
 		width: 700px;

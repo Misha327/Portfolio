@@ -138,7 +138,6 @@ export default class HomeSection extends React.Component {
 							retina_detect: true,
 						}}
 					></Particles>
-					<Jumbotron.Content justify="center">
 						<Jumbotron.TextWrapper>
 							<Jumbotron.WelcomeTitle
 								style={{
@@ -168,7 +167,6 @@ export default class HomeSection extends React.Component {
 								View my work <Icon className={"spinner"} src={arrowIcon} />
 							</Jumbotron.Button>
 						</Link>
-					</Jumbotron.Content>
 				</Jumbotron>
 			</div>
 		);

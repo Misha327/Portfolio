@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
 import HomeSection from "../components/HomeSection";
 import ProjectSection from "../components/ProjectSection";
@@ -44,6 +43,8 @@ class Home extends React.Component {
 		super(props);
 		this.state = {
 			isOpen: false,
+			hamburgerActive: false,
+
 			projectVisible: false,
 			cardsVisible: false,
 			aboutVisible: false,
@@ -97,14 +98,12 @@ class Home extends React.Component {
 			aboutHeight: homeHeight + projectHeight + aboutHeight,
 			contactHeight: homeHeight + projectHeight + aboutHeight + contactHeight,
 		}));
+		this.activeWindow();
 	};
 
 	activeWindow = () => {
 		const scrollBot = -document.body.getBoundingClientRect().top;
 
-		// console.log(scrollBot, this.state.projectHeight);
-
-		// todo: use fractions of the heights to show animation when are actually visible
 		// Project section
 		if (
 			scrollBot >= this.state.homeHeight / 3 &&
@@ -150,7 +149,7 @@ class Home extends React.Component {
 	toggle = () => {
 		this.setState((state) => {
 			return {
-				isOpen: !state.isOpen,
+				hamburgerActive: !state.hamburgerActive,
 			};
 		});
 	};
@@ -158,10 +157,10 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div style={{ width: "100%" }}>
-				<Sidebar isOpen={this.state.isOpen} toggle={this.toggle} />
 
 				<Header
 					toggle={this.toggle}
+					hamburgerActive={this.state.hamburgerActive}
 					homeHeight={this.state.homeHeight}
 					projectHeight={this.state.projectHeight}
 					aboutHeight={this.state.aboutHeight}

@@ -18,26 +18,25 @@ export const SidebarContainer = styled.aside`
   opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
 `;
 
-export const CloseIcon = styled(FaTimes)`
+export const CloseIcon = styled.div`
 	color: black;
 	height: 35px;
 	width: 35px;
 	transition: transform 0.1s ease-in;
 	:hover {
 		transform: scale(1.3);
-  }
-  padding: 5px;
-  user-select: none;
-
+	}
+	padding: 5px;
+	user-select: none;
 `;
 
 export const Icon = styled.div`
+	color: black;
 	position: absolute;
 	top: 30px;
 	right: 53px;
-  cursor: pointer;
-  user-select: none;
-
+	cursor: pointer;
+	user-select: none;
 `;
 
 export const MenuList = styled.ul`
@@ -63,5 +62,33 @@ export const SidebarLink = styled(LinkScroll)`
 	transition: background-color 0.2s ease-in;
 	:hover {
 		background-color: #35d49f;
+	}
+
+	.activeLink {
+		:before {
+			opacity: 0;
+			transform: translateY(-8px);
+			transition: transform 0s cubic-bezier(0.175, 0.885, 0.32, 1.275) k,
+				opacity 0s;
+		}
+		:after {
+			opacity: 0;
+			transform: translateY(8px/2);
+			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+				opacity 0.2s;
+		}
+		:before,
+		:after {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		:before {
+			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+				opacity 0.2s;
+		}
+		:after {
+			transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+				opacity 0s 0.2s;
+		}
 	}
 `;
