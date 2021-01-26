@@ -2,8 +2,10 @@ import React from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import Hamburger from "../Hamburger/Hamburger";
+import Sidebar from "../Sidebar/Sidebar";
 
-import { Navbar, Hamburger, NavLink, NavList, NavItem } from "./styles/styles";
+import { Navbar, NavLink, NavList, NavItem } from "./styles/styles";
 
 export default class Header extends React.Component {
 	constructor(props) {
@@ -33,12 +35,12 @@ export default class Header extends React.Component {
 	}
 	// Hide or show the menu.
 	handleScroll = () => {
-    const scrollBot =
-    document.body.getBoundingClientRect().top === 0
-    ? document.body.getBoundingClientRect().top
-    : -document.body.getBoundingClientRect().top;
-    
-    console.log(scrollBot, this.props.homeHeight);
+		const scrollBot =
+			document.body.getBoundingClientRect().top === 0
+				? document.body.getBoundingClientRect().top
+				: -document.body.getBoundingClientRect().top;
+
+		// console.log(scrollBot, this.props.homeHeight);
 		if (scrollBot >= 0 && scrollBot <= this.props.homeHeight) {
 			this.setState({
 				inHome: true,
@@ -91,7 +93,7 @@ export default class Header extends React.Component {
 				inAbout: false,
 				inHome: false,
 				inAbout: false,
-				color: "#08415C",
+				color: "#658E9C",
 				textColor: "white",
 				underlineColor: "#35d49f",
 
@@ -109,13 +111,22 @@ export default class Header extends React.Component {
 						backgroundColor={this.state.color}
 						className={this.state.show ? "active" : "hidden"}
 					>
-						{" "}
-						<Hamburger onClick={toggle}>
-							<FontAwesomeIcon
-								style={{ color: this.state.textColor }}
-								icon={faBars}
-							/>
-						</Hamburger>
+						<Hamburger
+							color={
+								this.props.hamburgerActive ? "black" : this.state.textColor
+							}
+							active={this.props.hamburgerActive}
+							toggle={toggle}
+						></Hamburger>
+						<Sidebar
+							inHome={this.state.inHome}
+							inProjects={this.state.inProjects}
+							inAbout={this.state.inAbout}
+							inContact={this.state.inContact}
+							isOpen={this.props.hamburgerActive}
+							toggle={toggle}
+						/>
+
 						<NavList textColor={this.state.textColor}>
 							<NavItem disabled>
 								<NavLink
@@ -165,10 +176,6 @@ export default class Header extends React.Component {
 	}
 }
 
-Header.Hamburger = function HeaderHamburger({ children }) {
-	return <Hamburger>{children}</Hamburger>;
-};
-
 const Transition = styled.div`
 	.active {
 		visibility: visible;
@@ -178,36 +185,33 @@ const Transition = styled.div`
 		visibility: hidden;
 		transition: all 0.2s ease-out;
 		transform: translate(0, -100%);
-  }
-  .activeLink  {
-    :before {
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: transform 0s cubic-bezier(0.175, 0.885, 0.32, 1.275) k,
-        opacity 0s;
-    }
-    :after {
-      opacity: 0;
-      transform: translateY(8px/2);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity 0.2s;
-    }
-    :before,
-    :after {
-      opacity: 1;
-      transform: translateY(0);
+	}
 
-    }
-    :before {
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity 0.2s;
-
-    }
-    :after {
-      transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity 0s 0.2s;
-
-    }
-  }
-  }
+	.activeLink {
+		:before {
+			opacity: 0;
+			transform: translateY(-8px);
+			transition: transform 0s cubic-bezier(0.175, 0.885, 0.32, 1.275) k,
+				opacity 0s;
+		}
+		:after {
+			opacity: 0;
+			transform: translateY(8px/2);
+			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+				opacity 0.2s;
+		}
+		:before,
+		:after {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		:before {
+			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+				opacity 0.2s;
+		}
+		:after {
+			transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+				opacity 0s 0.2s;
+		}
+	}
 `;

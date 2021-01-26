@@ -55,7 +55,6 @@ export const NavLink = styled(LinkScroll)`
 			font-size: 26px;
 		}
 	}
-	// text-shadow: 0px 0px 3px #000000c2;
 	font-size: 20px;
 	position: relative;
 	text-transform: uppercase;
@@ -103,7 +102,6 @@ export const NavLink = styled(LinkScroll)`
 	}
 `;
 
-const Line = styled.div``;
 
 
 export const Hamburger = styled.div`
