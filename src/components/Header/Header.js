@@ -93,7 +93,7 @@ export default class Header extends React.Component {
 				inAbout: false,
 				inHome: false,
 				inAbout: false,
-				color: "#08415C",
+				color: "#658E9C",
 				textColor: "white",
 				underlineColor: "#35d49f",
 

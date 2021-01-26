@@ -6,6 +6,7 @@ import {
 	Button,
 	MessageField,
 	Inner,
+	Header,
 } from "./style";
 import Jumbotron from "../Jumbotron/Jumbotron";
 import emailjs from "emailjs-com";
@@ -37,6 +38,8 @@ export default function ContactForm({ background = "black" }) {
 			<Container>
 				<Inner background={background}>
 					<Form onSubmit={sendEmail}>
+						<Header>Have a question or want to work together?</Header>
+
 						<FormField placeholder="Name" name="name" required></FormField>
 						<FormField placeholder="Email" name="email" required></FormField>
 						<FormField
@@ -50,7 +53,7 @@ export default function ContactForm({ background = "black" }) {
 							name="message"
 							required
 						></MessageField>
-						<Button type="submit">Send it</Button>
+						<Button type="submit">Send</Button>
 					</Form>
 				</Inner>
 			</Container>

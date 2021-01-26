@@ -50,8 +50,12 @@ export const MenuList = styled.ul`
 	grid-template-columns: 1fr;
 	grid-template-rows: repeat(4, 100px);
   text-align: center;
-  @media only screen and (min-height:${size.lg}){
+  @media only screen and (min-height:${size.md}){
     grid-gap: 50px;
+  }
+  @media only screen and (min-height:${size.lg}){
+    grid-gap: 100px;
+
   }
 `;
 export const TextContainer = styled.div`
@@ -65,7 +69,10 @@ export const Text = styled.a`
 	padding-bottom: 8px;
   font-weight: 600;
   font-size: 30px;
+  @media only screen and (min-height:${size.lg}){
+    font-size: 40px;
 
+  }
 	:before,
 	:after {
 		width: 100%;

@@ -18,7 +18,7 @@ export const Container = styled.div`
   }
   
   margin-top: auto;
-
+  padding-top: 25px;
 `;
 
 export const Wrapper = styled.div``;

@@ -22,7 +22,6 @@ export const Outer = styled.div`
 	display: flex;
 	scroll-snap-type: y mandatory;
 
-	// height: ${({ height }) => height};
 	min-height: ${({ minHeight }) => minHeight};
 	padding: 1.875rem 0.9375rem 1.875rem;
 	flex-wrap: wrap;
@@ -42,11 +41,7 @@ export const Outer = styled.div`
 
 	height: 100%;
 	@media only screen and (min-height: 44.25rem) {
-		// @media only screen and (min-width: 50rem) {
-		// 	padding: 3.75rem 3.75rem 5rem;
-		// }
 
-		// justify-content: ;
 	}
 	justify-content: ${({ justify }) => justify};
 `;
@@ -151,7 +146,7 @@ export const UnderlinedTitle = styled.h1`
 	display: -ms-flexbox;
 	display: flex;
 	@media only screen and (min-width: ${size.xs}) {
-		margin-top: 40px;
+		margin-top: 30px;
 		margin-bottom: 1.875rem;
 		font-size: 1.875rem;
 
@@ -161,6 +156,7 @@ export const UnderlinedTitle = styled.h1`
 		}
 	}
 	@media only screen and (min-width: ${size.sm}) {
+    
 		font-size: 3.125rem;
 		margin-top: 3.75rem;
 	}
@@ -191,7 +187,7 @@ export const UnderlinedTitle = styled.h1`
 	}
 	@media only screen and (min-height: ${size.lg}) {
 		margin-bottom: 3.125rem;
-		margin-top: 5.625rem;
+		margin-top: 100px;
 	}
 
 	-webkit-box-align: center;
@@ -296,13 +292,11 @@ export const Text = styled.p`
 		font-size: 1.25rem;
 
 		@media only screen and (min-height: ${size.md}) {
-			font-size: 1.75rem;
+			font-size: 1.5rem;
 		}
 	}
 	@media only screen and (min-width: ${heightSize.lg}) {
-		font-size: 1.5625rem;
 		@media only screen and (min-height: ${size.md}) {
-			font-size: 1.6875rem;
 			margin: ${({ margin }) => margin};
 		}
 		@media only screen and (min-height: 56.25rem) {

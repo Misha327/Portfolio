@@ -34,7 +34,7 @@ const Container = styled.div`
 	position: relative;
   float: right;
   margin: 0;
-	@media screen only and (min-width: ${size.md}) {
+	@media screen only and (min-height: ${size.md}) {
 		margin: 15px auto 0;
 	}
 	-webkit-transform: rotate(0deg);

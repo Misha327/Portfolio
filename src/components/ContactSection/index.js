@@ -21,7 +21,7 @@ export default class ContactSection extends React.Component {
 					id="contact"
 				></div>
 
-				<Jumbotron backgroundColor={"#08415C"}>
+				<Jumbotron backgroundColor={"#658E9C"}>
 					<Jumbotron.Content justify={"center"} color={"white"}>
 						<Animated
 							animationIn="bounceInLeft"
@@ -41,7 +41,6 @@ export default class ContactSection extends React.Component {
 							animationOut="fadeOut"
 							isVisible={this.props.formVisible}
 						>
-							<BottomText>Have a question or want to work together?</BottomText>
 						</Animated>
 						<Animated
 							animationIn="bounceIn"
@@ -109,13 +108,10 @@ const BottomText = styled.p`
 		}
 	}
 	@media only screen and (min-width: ${size.md}) {
-		font-size: 25px;
 		@media only screen and (min-height: ${size.md}) {
-			font-size: 27px;
 			margin: ${({ margin }) => margin};
 		}
 		@media only screen and (min-height: 900px) {
-			font-size: 27px;
 		}
 	}
 
